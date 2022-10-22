@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  web:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./app/:/usr/src/app/
+      - static_volume:/usr/src/app/staticfiles
+      - media_volume:/usr/src/app/mediafiles
+    ports:
+      - 8000:8000
+    environment:
+      - HOST_NAME=127.0.0.1
+      - EMAIL_HOST=email.sadfdsf
+      - EMAIL_HOST_USER=email@email.com
+      - EMAIL_HOST_PASSWORD=password
+      - EMAIL_PORT=123
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+  celery:
+    build: 
+      context: ./app
+      dockerfile: Dockerfile
+    command: ['celery', '-A', 'app', 'worker', '-l', 'INFO']
+    volumes:
+      - ./app/:/usr/src/app/
+    environment:
+      - HOST_NAME=0.0.0.0
+      - EMAIL_HOST=email.sadfdsf
+      - EMAIL_HOST_USER=email@email.com
+      - EMAIL_HOST_PASSWORD=password
+      - EMAIL_PORT=123
+    depends_on:
+      - redis
+volumes:
+  static_volume:
+  media_volume:
