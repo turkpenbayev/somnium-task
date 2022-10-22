@@ -26,8 +26,7 @@ class Department(models.Model):
     parent = models.ForeignKey(
         'self', on_delete=models.CASCADE, related_name='sub_departments', null=True, blank=True)
     name = models.CharField(max_length=256)
-    supervisor = models.OneToOneField(
-        Personal, on_delete=models.SET_NULL, null=True)
+    supervisor = models.ForeignKey(Personal, on_delete=models.SET_NULL, related_name='departments', null=True)
 
 
 class DepartmentPersonalPostion(models.Model):
