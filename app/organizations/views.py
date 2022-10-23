@@ -135,6 +135,6 @@ class PersonalTaskViewSet(mixins.CreateModelMixin,
         task = serializer.save()
         notify_personal.apply_async(
             args=(task.pk, ),
-            eta=task.notify_at
+            eta=task.deadline_at
         )
         return Response(serializer.data, status=status.HTTP_201_CREATED)

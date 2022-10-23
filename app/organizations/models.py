@@ -43,5 +43,5 @@ class PersonalTask(models.Model):
     personal = models.ForeignKey(
         Personal, on_delete=models.CASCADE, related_name='tasks')
     body = models.TextField()
-    notify_at = models.DateTimeField()
+    deadline_at = models.DateTimeField()
     notified = models.BooleanField(default=False)

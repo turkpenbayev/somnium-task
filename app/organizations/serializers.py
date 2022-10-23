@@ -161,5 +161,5 @@ class CreateTaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PersonalTask
-        fields = ('id', 'personal', 'body', 'notify_at', 'notified')
+        fields = ('id', 'personal', 'body', 'deadline_at', 'notified')
         read_only_fields = ('id', 'notified')
