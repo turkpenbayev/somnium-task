@@ -4,3 +4,5 @@
 ```sh
 $ docker-compose up -d --build
 ```
+
+1. Test it out at [http://localhost:8000/api/docs/](http://localhost:8000/api/docs/)
